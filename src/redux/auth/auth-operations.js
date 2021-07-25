@@ -5,10 +5,10 @@ axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
 const token = {
     set(token) {
-        return axios.defaults.headers.common['Authorization'] = token;
+        return axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     },
     unset() {
-        return axios.defaults.headers.common['Authorization'] = "";
+        return axios.defaults.headers.common.Authorization = "";
     }
 }
 
@@ -17,8 +17,9 @@ export const login = creds => async dispatch => {
 
     try {
         const response = await axios.post("/users/login", creds);
-        dispatch(actions.loginSuccess(response.data));
         token.set(response.data.token)
+        dispatch(actions.loginSuccess(response.data));
+        
     } catch (error) {
         dispatch(actions.loginFailure(error.message));
     };
@@ -29,8 +30,9 @@ export const logout = () => async dispatch => {
 
     try {
         await axios.post("/users/logout");
-        dispatch(actions.logOutSuccess());
         token.unset()
+        dispatch(actions.logOutSuccess());
+        
     } catch (error) {
         dispatch(actions.logOutFailure(error.message));
     }
@@ -41,8 +43,8 @@ export const register = creds => async dispatch => {
 
     try {
         const response = await axios.post("/users/signup", creds);
-        dispatch(actions.registerSuccess(response.data));
         token.set(response.data.token)
+        dispatch(actions.registerSuccess(response.data));
     } catch (error) {
         dispatch(actions.registerFailure(error.message));
     }
