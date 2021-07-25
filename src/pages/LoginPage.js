@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import authOperations from '../redux/auth/auth-operations';
+import {login} from '../redux/auth/auth-operations';
 import "../styles/form.css";
 
 class Login extends Component {
@@ -40,7 +40,7 @@ class Login extends Component {
 } 
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: (creds) => dispatch(authOperations.login(creds))
+    onSubmit: (creds) => dispatch(login(creds))
 })
 
 export default connect(null, mapDispatchToProps)(Login)

@@ -12,7 +12,7 @@ const token = {
     }
 }
 
-const login = creds => async dispatch => {
+export const login = creds => async dispatch => {
     dispatch(actions.authRequest());
 
     try {
@@ -24,7 +24,7 @@ const login = creds => async dispatch => {
     };
 };
 
-const logout = () => async dispatch => {
+export const logout = () => async dispatch => {
     dispatch(actions.authRequest());
 
     try {
@@ -36,7 +36,7 @@ const logout = () => async dispatch => {
     }
 };
 
-const register = creds => async dispatch => {
+export const register = creds => async dispatch => {
     dispatch(actions.authRequest());
 
     try {
@@ -48,7 +48,7 @@ const register = creds => async dispatch => {
     }
 };
 
-const getCurrentUser = () => async (dispatch, getState) => {
+export const getCurrentUser = () => async (dispatch, getState) => {
     const {auth: {token: persistedToken}} = getState();
 
     if(!persistedToken){
@@ -65,11 +65,4 @@ const getCurrentUser = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch(actions.getCurrentUserFailure(error.message));
     }
-};
-
-export default {
-    login, 
-    logout, 
-    register, 
-    getCurrentUser,
 };

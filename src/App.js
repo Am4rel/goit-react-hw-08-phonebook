@@ -2,8 +2,8 @@ import React, {Component, Suspense, lazy} from 'react';
 import {connect} from 'react-redux'
 import { Switch, Route} from 'react-router-dom';
 import { AppBar } from './components/AppBar';
-import authOperations from './redux/auth/auth-operations';
-import authSelectors from './redux/auth/auth-selectors';
+import {getCurrentUser} from './redux/auth/auth-operations';
+import {isAuthenticated} from './redux/auth/auth-selectors';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 
@@ -36,11 +36,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: authSelectors.isAuthenticated(state),
+  isAuthenticated: isAuthenticated(state),
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCurrentUser: () => dispatch(authOperations.getCurrentUser())
+  getCurrentUser: () => dispatch(getCurrentUser())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

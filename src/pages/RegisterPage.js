@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import authOperations from '../redux/auth/auth-operations';
+import {register} from '../redux/auth/auth-operations';
 import "../styles/form.css";
 
 class Register extends Component {
@@ -63,7 +63,7 @@ class Register extends Component {
 } 
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: (creds) => dispatch(authOperations.register(creds))
+    onSubmit: (creds) => dispatch(register(creds))
 })
 
 export default connect(null, mapDispatchToProps)(Register)
